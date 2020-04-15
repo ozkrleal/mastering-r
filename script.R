@@ -10,7 +10,7 @@ binance_coins_prices()[symbol == 'BTC', usd]
 # library(fixerapi)
 # fixerapi::fixer_latest(base = "USD", symbols = "HUF")
 # today_symbols <- fixer_latest(base = "EUR", 
-#                               symbols = c("JPY", "GBP", "USD", "CAD", "CHF"))Behavioral Finance
+#                               symbols = c("JPY", "GBP", "USD", "CAD", "CHF"))
 # 
 # print(today_symbols)
 
