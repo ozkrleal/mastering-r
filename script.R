@@ -2,6 +2,7 @@ library(binancer)
 library(logger)
 library(checkmate)
 library(jsonlite)
+library(scales)
 log_threshold(TRACE)
 
 prices <- binance_ticker_all_prices()
@@ -18,16 +19,20 @@ get_bitcoin_price <- function() {
 BITCOINS <- 0.42
 log_info('Number of Bitcoins: {BITCOINS}')
 
+forint <- function(x) {
+  dollar(x, prefix = '', suffix = 'Ft')
+}
+
 btcusdt <- get_bitcoin_price()
-log_info('The value of 1 Bitcoin in USD: {btcusdt}')
+log_info('The value of 1 Bitcoin in USD: {dollar(btcusdt)}')
 #log_eval(btcusdt)
 assert_number(btcusdt, lower = 1000)
 
 usdhuf <- fromJSON('https://api.exchangeratesapi.io/latest?base=USD&symbols=HUF')$rates$HUF
-log_info('The value of 1 USD in HUF: {usdhuf}')
+log_info("The value of 1 USD in HUF: {}")
 assert_number(usdhuf, lower = 250, upper = 500)
 
 
 BITCOINS * btcusdt * usdhuf
-log_eval(BITCOINS*btcusd*usdhuf)
+log_eval(forint(BITCOINS*btcusd*usdhuf))
 
