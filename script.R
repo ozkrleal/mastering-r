@@ -10,10 +10,14 @@ prices[from == 'BTC' & to == 'USDT', price]
 
 binance_coins_prices()[symbol == 'BTC', usd]
 
-get_bitcoin_price <- function() {
+get_bitcoin_price <- function(retried = 0) {
   tryCatch(
     binance_coins_prices()[symbol == 'BTC', usd],
-    error = function(e) get_bitcoin_price())
+    error = function(e) {
+      ## exponential backoff retries
+      Sys.sleep(1 + retried ^ 2)
+      get_bitcoin_price(retried = retried + 1)
+      })
 }
 
 BITCOINS <- 0.42
@@ -34,5 +38,7 @@ assert_number(usdhuf, lower = 250, upper = 500)
 
 
 BITCOINS * btcusdt * usdhuf
-log_eval(forint(BITCOINS*btcusd*usdhuf))
+log_eval(forint(BITCOINS*btcusdt*usdhuf))
 
+#debugonce is useful
+# ::: three colons toaccess private fnctions within a library
