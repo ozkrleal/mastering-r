@@ -1,0 +1,7 @@
+freemysql:
+  host: sql7.freemysqlhosting.net
+  port: 3306
+  dbname: sql7340045
+  user: sql7340045
+  password: fShfwv4WeV
+  drv: !expr RMySQL::MySQL()

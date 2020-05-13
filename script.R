@@ -5,8 +5,8 @@ library(jsonlite)
 library(scales)
 log_threshold(TRACE)
 
-prices <- binance_ticker_all_prices()
-prices[from == 'BTC' & to == 'USDT', price]
+#prices <- binance_ticker_all_prices()
+#prices[from == 'BTC' & to == 'USDT', price]
 
 binance_coins_prices()[symbol == 'BTC', usd]
 
